@@ -8,62 +8,6 @@
   --font-sans: var(--font-sans);
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
-  /* COLOUR PALETTE: */
-  --color-brown-red-50: #faeaed;
-  --color-brown-red-100: #f6d5da;
-  --color-brown-red-200: #ecacb6;
-  --color-brown-red-300: #e38291;
-  --color-brown-red-400: #d9596c;
-  --color-brown-red-500: #d02f47;
-  --color-brown-red-600: #a62639;
-  --color-brown-red-700: #7d1c2b;
-  --color-brown-red-800: #53131d;
-  --color-brown-red-900: #2a090e;
-  --color-brown-red-950: #1d070a;
-  --color-amaranth-50: #fbe9ec;
-  --color-amaranth-100: #f7d4da;
-  --color-amaranth-200: #f0a8b4;
-  --color-amaranth-300: #e87d8f;
-  --color-amaranth-400: #e05269;
-  --color-amaranth-500: #d92644;
-  --color-amaranth-600: #ad1f36;
-  --color-amaranth-700: #821729;
-  --color-amaranth-800: #570f1b;
-  --color-amaranth-900: #2b080e;
-  --color-amaranth-950: #1e050a;
-  --color-taupe-grey-50: #f3f1f2;
-  --color-taupe-grey-100: #e8e3e5;
-  --color-taupe-grey-200: #d0c8cb;
-  --color-taupe-grey-300: #b9acb1;
-  --color-taupe-grey-400: #a19197;
-  --color-taupe-grey-500: #8a757d;
-  --color-taupe-grey-600: #6e5e64;
-  --color-taupe-grey-700: #53464b;
-  --color-taupe-grey-800: #372f32;
-  --color-taupe-grey-900: #1c1719;
-  --color-taupe-grey-950: #131012;
-  --color-rosy-granite-50: #f3f2f2;
-  --color-rosy-granite-100: #e7e5e4;
-  --color-rosy-granite-200: #cecbca;
-  --color-rosy-granite-300: #b6b0af;
-  --color-rosy-granite-400: #9d9695;
-  --color-rosy-granite-500: #857c7a;
-  --color-rosy-granite-600: #6a6362;
-  --color-rosy-granite-700: #504a49;
-  --color-rosy-granite-800: #353231;
-  --color-rosy-granite-900: #1b1918;
-  --color-rosy-granite-950: #131111;
-  --color-night-bordeaux-50: #f8ecef;
-  --color-night-bordeaux-100: #f2d9df;
-  --color-night-bordeaux-200: #e5b3c0;
-  --color-night-bordeaux-300: #d88da0;
-  --color-night-bordeaux-400: #cb6780;
-  --color-night-bordeaux-500: #be4160;
-  --color-night-bordeaux-600: #98344d;
-  --color-night-bordeaux-700: #72273a;
-  --color-night-bordeaux-800: #4c1a27;
-  --color-night-bordeaux-900: #260d13;
-  --color-night-bordeaux-950: #1b090d;
   --font-heading: var(--font-sans);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -119,6 +63,8 @@
   }
   * {
     @apply border-border outline-ring/50;
+    transition: background-color 250ms ease, color 250ms ease,
+      border-color 250ms ease;
   }
   html {
     @apply font-sans;

@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { Moon } from "lucide-react";
+import { MoonStar, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -13,6 +14,8 @@ const navItems = [
 ];
 
 export function Navbar() {
+  const { resolvedTheme, setTheme } = useTheme();
+
   return (
     <header className="sticky top-0 z-50 w-full border-b-2 border-border/80 backdrop-blur-md">
       {/* Logo */}
@@ -40,8 +43,12 @@ export function Navbar() {
             variant="default"
             size="default"
             className="h-9 w-9 items-center justify-center rounded-full border border-border bg-card drop-shadow-xs hover:bg-secondary transition-colors"
+            onClick={() =>
+              setTheme(resolvedTheme === "dark" ? "light" : "dark")
+            }
           >
-            <Moon className="fill-foreground" />
+            <Sun className="hidden dark:block text-foreground" />
+            <MoonStar className="block dark:hidden text-foreground" />
           </Button>
           <Button className="drop-shadow-xs">Join Us</Button>
         </div>
@@ -49,3 +56,4 @@ export function Navbar() {
     </header>
   );
 }
+
