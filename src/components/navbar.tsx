@@ -43,9 +43,7 @@ export function Navbar() {
             variant="default"
             size="default"
             className="h-9 w-9 items-center justify-center rounded-full border border-border bg-card drop-shadow-xs hover:bg-secondary transition-colors"
-            onClick={() =>
-              setTheme(resolvedTheme === "dark" ? "light" : "dark")
-            }
+            onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
           >
             <Sun className="hidden dark:block text-foreground" />
             <MoonStar className="block dark:hidden text-foreground" />
@@ -56,4 +54,3 @@ export function Navbar() {
     </header>
   );
 }
-

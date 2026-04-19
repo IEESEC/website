@@ -53,6 +53,7 @@
   body {
     background-color: var(--background);
     color: var(--foreground);
+    transition: color 150ms ease;
 
     @apply font-sans antialiased bg-background text-foreground;
   }
@@ -63,8 +64,9 @@
   }
   * {
     @apply border-border outline-ring/50;
-    transition: background-color 250ms ease, color 250ms ease,
-      border-color 250ms ease;
+    transition-property: background-color, border-color;
+    transition-duration: 250ms;
+    transition-timing-function: ease;
   }
   html {
     @apply font-sans;
