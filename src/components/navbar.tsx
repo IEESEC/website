@@ -2,8 +2,7 @@
 
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { MoonStar, Sun, Menu, X } from "lucide-react";
-import { useTheme } from "next-themes";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
 const navItems = [
@@ -15,99 +14,94 @@ const navItems = [
 ];
 
 export function Navbar() {
-  const { resolvedTheme, setTheme } = useTheme();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
 
   return (
     <>
-      <header className="sticky top-0 z-40 w-full border-b-2 border-border/80 backdrop-blur-md">
-        {/* Logo */}
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
-          <Link href="/" className="flex items-center gap-3">
-            <span className="text-2xl font-semibold text-foreground">IEESEC</span>
-          </Link>
+      <header className="absolute top-0 left-0 right-0 z-40 w-full">
+        <div className="mx-auto max-w-7xl px-4 pt-3">
+          <div className="flex h-14 items-center justify-between rounded-2xl bg-background/20 dark:bg-background/30 backdrop-blur-md border border-foreground/6 dark:border-foreground/10 px-5 shadow-lg shadow-black/3 dark:shadow-black/20">
+            {/* Logo */}
+            <Link href="/" className="flex items-center gap-3 group">
+              <span className="text-xl font-bold tracking-tight text-foreground transition-colors group-hover:text-primary">
+                IEEESEC
+              </span>
+            </Link>
 
-          <nav className="hidden md:flex items-center gap-1">
-            {navItems.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                className="px-4 py-2 text-sm font-medium will-change backface-visibility text-muted-foreground"
-              >
-                <span className="transition-all duration-250 hover:text-shadow-xs hover:text-foreground">
+            {/* Desktop nav */}
+            <nav className="hidden md:flex items-center gap-0.5">
+              {navItems.map((item) => (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className="px-3.5 py-1.5 text-sm font-medium text-white/70 rounded-lg transition-colors duration-200 hover:text-white hover:bg-muted/70"
+                >
                   {item.label}
-                </span>
-              </Link>
-            ))}
-          </nav>
+                </Link>
+              ))}
+            </nav>
 
-          {/* Desktop */}
-          <div className="hidden md:flex items-center gap-3">
-            <Button
-              variant="default"
-              size="default"
-              className="h-9 w-9 items-center justify-center rounded-lg border border-border bg-card drop-shadow-xs hover:bg-secondary transition-colors"
-              onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-            >
-              <Sun className="hidden dark:block text-foreground" />
-              <MoonStar className="block dark:hidden text-foreground" />
-            </Button>
-            <Button className="drop-shadow-xs">Join Us</Button>
-          </div>
+            {/* Desktop actions */}
+            <div className="hidden md:flex items-center gap-2">
+              <Button className="h-8 rounded-full bg-primary px-5 text-sm font-semibold text-primary-foreground hover:bg-primary/85 transition-colors">
+                Join Us
+              </Button>
+            </div>
 
-          {/* Mobile */}
-          <div className="flex md:hidden items-center gap-3">
-            <Button
-              variant="default"
-              size="default"
-              className="h-9 w-9 items-center justify-center rounded-lg border border-border bg-card drop-shadow-xs hover:bg-secondary transition-colors"
-              onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-            >
-              <Sun className="hidden dark:block text-foreground" />
-              <MoonStar className="block dark:hidden text-foreground" />
-            </Button>
-            <Button variant="ghost" size="icon" onClick={toggleSidebar} aria-label="Toggle menu">
-              <Menu className="h-6 w-6 text-foreground" />
-            </Button>
+            {/* Mobile actions */}
+            <div className="flex md:hidden items-center gap-2">
+              <button
+                className="flex h-8 w-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:text-foreground hover:bg-muted cursor-pointer"
+                onClick={toggleSidebar}
+                aria-label="Toggle menu"
+              >
+                <Menu className="h-5 w-5" />
+              </button>
+            </div>
           </div>
         </div>
       </header>
 
-      {/* KANEI BLUR TO BACKGROUND OTAN EXEIS ANOIXTO TO MOBILE SIDEBAR */}
+      {/* Backdrop overlay */}
       {isSidebarOpen && (
         <div
-          className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm md:hidden"
+          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm md:hidden"
           onClick={toggleSidebar}
         />
       )}
 
       {/* Mobile Sidebar */}
       <div
-        className={`fixed inset-y-0 right-0 z-60 w-64 transform border-l border-border bg-background p-6 shadow-lg transition-transform duration-300 ease-in-out md:hidden ${
+        className={`fixed inset-y-0 right-0 z-60 w-72 transform bg-card border-l border-border p-8 shadow-2xl transition-transform duration-300 ease-in-out md:hidden ${
           isSidebarOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex items-center justify-end mb-8">
-          <Button variant="ghost" size="icon" onClick={toggleSidebar}>
-            <X className="h-6 w-6 text-foreground" />
-          </Button>
+        <div className="flex items-center justify-between mb-10">
+          <button
+            onClick={toggleSidebar}
+            className="flex h-9 w-9 items-center justify-center rounded-full text-muted-foreground hover:text-foreground hover:bg-muted transition-colors cursor-pointer"
+          >
+            <X className="h-5 w-5" />
+          </button>
         </div>
 
-        <nav className="flex flex-col items-center justify-center gap-4">
+        <nav className="flex flex-col gap-1">
           {navItems.map((item) => (
             <Link
               key={item.label}
               href={item.href}
-              className="text-lg font-medium text-muted-foreground transition-colors hover:text-foreground"
+              className="px-4 py-3 text-base font-medium text-muted-foreground rounded-xl transition-colors hover:text-foreground hover:bg-muted"
               onClick={toggleSidebar}
             >
               {item.label}
             </Link>
           ))}
-          <div className="mt-4">
-            <Button className="w-full drop-shadow-xs">Join Us</Button>
+          <div className="mt-6 px-4">
+            <Button className="w-full h-10 rounded-full bg-primary text-primary-foreground font-semibold hover:bg-primary/85 transition-colors">
+              Join Us
+            </Button>
           </div>
         </nav>
       </div>

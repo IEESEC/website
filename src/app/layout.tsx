@@ -2,9 +2,13 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Plus_Jakarta_Sans, Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import { ThemeProvider } from "@/providers/theme-provider";
+import { Navbar } from "@/components/navbar";
+import { Footbar } from "@/components/footbar";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
 
 const jakartaSans = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
@@ -51,7 +55,7 @@ export const metadata: Metadata = {
   authors: [{ name: "IEESEC Team" }],
   creator: "IEESEC",
   icons: {
-    icon: "/favicon.ico",
+    icon: "/images/ico/favicon.ico",
   },
   openGraph: {
     type: "website",
@@ -93,10 +97,10 @@ export default function RootLayout({
   return (
     <html
       lang="el"
-      suppressHydrationWarning
       className={cn(
         "h-full",
         "antialiased",
+        "dark",
         jakartaSans.variable,
         geistMono.variable,
         geistSans.variable,
@@ -105,9 +109,9 @@ export default function RootLayout({
       )}
     >
       <body className="min-h-full flex flex-col">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {children}
-        </ThemeProvider>
+        <Navbar />
+        {children}
+        <Footbar />
       </body>
     </html>
   );
