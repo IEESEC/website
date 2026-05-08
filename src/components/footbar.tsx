@@ -11,42 +11,70 @@ const quickLinks = [
 
 export function Footbar() {
   return (
-    <footer className="border-t-2 border-border/80 py-8">
-      <div className="mx-auto max-w-7xl px-4 lg:px-8">
-        <div className="grid gap-8 md:grid-cols-4">
+    <footer className="relative z-10 w-full bg-background">
+      <div className="mx-auto max-w-7xl px-6 pt-16 pb-8">
+        {/* Diaxoristiki grammi */}
+        <div className="h-px bg-linear-to-r from-transparent via-border to-transparent mb-12" />
+
+        {/* Main Footbar Container */}
+        <div className="grid gap-10 md:grid-cols-4">
+          {/* Description Subcontainer */}
           <div className="col-span-2">
-            <div className="flex items-center gap-3 mb-4">
+            <div className="flex items-center gap-3 mb-3">
               {/*edw tha exei kai to logo*/}
-              <span className="text-lg font-semibold text-foreground">
-                IEE Software Engineering Community
-              </span>
+              <span className="text-xl font-bold tracking-tight text-primary">IEESEC</span>
             </div>
-            <p className="text-muted-foreground">
-              The Software Engineering Student Team of <Link href="https://iee.ihu.gr">IEE</Link>.
+            <p className="text-muted-foreground text-sm leading-relaxed max-w-sm">
+              The Software Engineering Student Team of&nbsp;
+              <Link
+                href="https://iee.ihu.gr"
+                className="text-primary/70 hover:text-primary transition-colors"
+              >
+                Informatics and Electronics Engineering Department
+              </Link>
+              &nbsp;at International Hellenic University.
             </p>
           </div>
+
+          {/* Quick Links Subcontainer */}
           <div>
-            <h4 className="mb-4 font-semibold text-foreground">Quick Links</h4>
-            <ul className="space-y-2 text-muted-foreground flex flex-col">
+            <h4 className="mb-4 text-xs font-semibold uppercase tracking-widest text-muted-foreground/60">
+              Quick Links
+            </h4>
+            <ul className="space-y-2.5 flex flex-col">
               {quickLinks.map((item) => (
                 <Link href={item.href} key={item.label}>
-                  <span className="hover:text-foreground transition-colors">{item.label}</span>
+                  <span className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                    {item.label}
+                  </span>
                 </Link>
               ))}
             </ul>
           </div>
+
+          {/* Location Subcontainer */}
           <div>
-            <h4 className="mb-4 font-semibold text-foreground">Location</h4>
-            <ul className="space-y-2 text-muted-foreground">
+            <h4 className="mb-4 text-xs font-semibold uppercase tracking-widest text-muted-foreground/60">
+              Location
+            </h4>
+            <ul className="space-y-2.5 text-sm text-muted-foreground">
               <li>International Hellenic University</li>
               <li>Sindos Campus</li>
               <li>Sindos 574 00</li>
-              <li>ieesec.ihu@gmail.com</li>
+              <Link href="mailto:ieesec.ihu@gmail.com">
+                <li className="text-primary/70">ieesec.ihu@gmail.com</li>
+              </Link>
             </ul>
           </div>
         </div>
-        <div className="mt-12 border-t-2 border-border/80 pt-8 text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} IEESEC | All rights reserved.</p>
+
+        {/* Copyright container */}
+        <div className="mt-10 text-center">
+          {/* Diaxoristiki grammi */}
+          <div className="h-px bg-linear-to-r from-transparent via-border to-transparent mb-12" />
+          <p className="text-xs text-muted-foreground/70">
+            &copy; {new Date().getFullYear()} IEESEC &middot; All rights reserved.
+          </p>
         </div>
       </div>
     </footer>
