@@ -3,32 +3,92 @@
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { cn } from "@/lib/utils";
 
 const navItems = [
-  { label: "Home", href: "/" },
-  { label: "Team", href: "/team" },
-  { label: "Projects", href: "/projects" },
-  { label: "Events", href: "/events" },
-  { label: "Blog", href: "/blog" },
+  { label: "Home", href: "#home" },
+  { label: "Team", href: "#team" },
+  { label: "Projects", href: "#projects" },
+  { label: "Events", href: "#events" },
+  { label: "Blog", href: "#blog" },
 ];
 
 export function Navbar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
 
   const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
 
+  // Scroll Observer gia na kanei highlight to active section.
+  useEffect(() => {
+    const sectionIds = navItems.map((item) => item.href.slice(1));
+    const observers: IntersectionObserver[] = [];
+
+    const handleIntersect = (id: string) => (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(id);
+        }
+      });
+    };
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      const observer = new IntersectionObserver(handleIntersect(id), {
+        rootMargin: "-40% 0px -55% 0px",
+      });
+      observer.observe(el);
+      observers.push(observer);
+    });
+
+    const handleScroll = () => {
+      if (window.scrollY < window.innerHeight * 0.5) {
+        setActiveSection("home");
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      observers.forEach((o) => o.disconnect());
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const scrollTo = useCallback((href: string) => {
+    if (href === "#home") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      const el = document.getElementById(href.slice(1));
+      el?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, []);
+
+  const handleNavClick = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+      e.preventDefault();
+      scrollTo(href);
+    },
+    [scrollTo],
+  );
+
   return (
     <>
-      <header className="absolute top-0 left-0 right-0 z-40 w-full">
+      <header className="fixed top-0 left-0 right-0 z-40 w-full">
         <div className="mx-auto max-w-7xl px-4 pt-3">
           <div className="flex h-14 items-center justify-between rounded-2xl bg-background/20 dark:bg-background/30 backdrop-blur-md border border-foreground/6 dark:border-foreground/10 px-5 shadow-lg shadow-black/3 dark:shadow-black/20">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-3 group">
+            <a
+              href="#home"
+              onClick={(e) => handleNavClick(e, "#home")}
+              className="flex items-center gap-3 group"
+            >
               <span className="text-xl font-bold tracking-tight text-foreground transition-colors group-hover:text-primary">
                 IEEESEC
               </span>
-            </Link>
+            </a>
 
             {/* Desktop nav */}
             <nav className="hidden md:flex items-center gap-0.5">
@@ -36,7 +96,13 @@ export function Navbar() {
                 <Link
                   key={item.label}
                   href={item.href}
-                  className="px-3.5 py-1.5 text-sm font-medium text-white/70 rounded-lg transition-colors duration-200 hover:text-white hover:bg-muted/70"
+                  onClick={(e) => handleNavClick(e, item.href)}
+                  className={cn(
+                    "px-3.5 py-1.5 text-sm font-medium rounded-lg transition-colors duration-200",
+                    activeSection === item.href.slice(1)
+                      ? "text-primary bg-primary/15"
+                      : "text-white/70 hover:text-primary hover:bg-primary/10",
+                  )}
                 >
                   {item.label}
                 </Link>
@@ -92,8 +158,16 @@ export function Navbar() {
             <Link
               key={item.label}
               href={item.href}
-              className="px-4 py-3 text-base font-medium text-muted-foreground rounded-xl transition-colors hover:text-foreground hover:bg-muted"
-              onClick={toggleSidebar}
+              onClick={(e) => {
+                handleNavClick(e, item.href);
+                toggleSidebar();
+              }}
+              className={cn(
+                "px-4 py-3 text-base font-medium rounded-xl transition-colors",
+                activeSection === item.href.slice(1)
+                  ? "text-primary bg-primary/10"
+                  : "text-muted-foreground hover:text-primary hover:bg-primary/5",
+              )}
             >
               {item.label}
             </Link>
