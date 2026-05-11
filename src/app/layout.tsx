@@ -27,6 +27,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://ieesec-website.vercel.app/"),
   title: {
     default: "IEESEC | Software Engineering Community @ IHU",
     template: "%s | IEESEC",
@@ -69,7 +70,7 @@ export const metadata: Metadata = {
     images: [
       {
         // TODO: Να φτιάξουμε μια κανονική εικόνα banner κι να μπει στο /public.
-        url: "/og-image.png",
+        url: "/images/metadata/og-image.png",
         width: 1200,
         height: 630,
         alt: "IEESEC Banner",
@@ -81,7 +82,7 @@ export const metadata: Metadata = {
     title: "IEESEC | Software Engineering Community",
     description: "Join the next generation of Software Engineers at IHU Sindos.",
     // TODO: Να φτιάξουμε μια κανονική εικόνα banner κι να μπει στο /public.
-    images: ["/og-image.png"],
+    images: ["/images/metadata/og-image.png"],
   },
   robots: {
     index: true,

@@ -78,7 +78,8 @@ export function Navbar() {
     <>
       <header className="fixed top-0 left-0 right-0 z-40 w-full">
         <div className="mx-auto max-w-7xl px-4 pt-3">
-          <div className="flex h-14 items-center justify-between rounded-2xl bg-background/20 dark:bg-background/30 backdrop-blur-md border border-foreground/6 dark:border-foreground/10 px-5 shadow-lg shadow-black/3 dark:shadow-black/20">
+          <div className="relative flex h-14 items-center justify-between rounded-2xl bg-background/20 dark:bg-background/30 backdrop-blur-md border border-primary/10 px-5 shadow-lg shadow-black/3 dark:shadow-black/20">
+            <div className="absolute -bottom-px left-1/2 -translate-x-1/2 w-1/2 h-px bg-linear-to-r from-transparent via-primary/50 to-transparent" />
             {/* Logo */}
             <a
               href="#home"
