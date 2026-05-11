@@ -60,15 +60,15 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "el_GR",
-    // TODO: Να βάλουμε με το πραγματικό link του site.
-    // url: "https://ieesec.gr",
+    // TODO: Να βάλουμε με το πραγματικό link του site, για τώρα έχω βάλει το vercel link.
+    url: "https://ieesec-website.vercel.app/",
     siteName: "IEESEC",
     title: "IEESEC | Software Engineering Community",
     description:
       "Build real-world skills through open-source projects and workshops. Join the IEE Software Engineering community.",
     images: [
       {
-        // TODO: Να φτιάξουμε μια εικόνα banner κι να μπει στο /public.
+        // TODO: Να φτιάξουμε μια κανονική εικόνα banner κι να μπει στο /public.
         url: "/og-image.png",
         width: 1200,
         height: 630,
@@ -80,8 +80,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "IEESEC | Software Engineering Community",
     description: "Join the next generation of Software Engineers at IHU Sindos.",
-    // TODO: Να βάλουμε το πραγματικό logo του site.
-    // images: ["/og-image.png"],
+    // TODO: Να φτιάξουμε μια κανονική εικόνα banner κι να μπει στο /public.
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
