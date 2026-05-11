@@ -74,7 +74,7 @@ export function Footbar() {
           {/* Diaxoristiki grammi */}
           <div className="w-full max-w-xl h-px bg-linear-to-r from-transparent via-primary/20 to-transparent mb-8" />
           <p className="text-xs text-muted-foreground/60">
-            &copy; {new Date().getFullYear()} IEESEC &middot; All rights reserved.
+            &copy; {new Date().getFullYear()}&nbsp;IEESEC &middot; All rights reserved.
           </p>
         </div>
       </div>
