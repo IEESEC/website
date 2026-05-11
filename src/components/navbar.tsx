@@ -100,8 +100,8 @@ export function Navbar() {
                   className={cn(
                     "px-3.5 py-1.5 text-sm font-medium rounded-lg transition-colors duration-200",
                     activeSection === item.href.slice(1)
-                      ? "text-white bg-muted/70"
-                      : "text-white/70 hover:text-white hover:bg-muted/70",
+                      ? "text-primary bg-primary/15"
+                      : "text-white/70 hover:text-primary hover:bg-primary/10",
                   )}
                 >
                   {item.label}
@@ -165,8 +165,8 @@ export function Navbar() {
               className={cn(
                 "px-4 py-3 text-base font-medium rounded-xl transition-colors",
                 activeSection === item.href.slice(1)
-                  ? "text-foreground bg-muted"
-                  : "text-muted-foreground hover:text-foreground hover:bg-muted",
+                  ? "text-primary bg-primary/10"
+                  : "text-muted-foreground hover:text-primary hover:bg-primary/5",
               )}
             >
               {item.label}
